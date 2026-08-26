@@ -1,0 +1,201 @@
+import { useEffect } from "react";
+import { Target, Heart, Lightbulb, Shield, Globe, TrendingUp } from "lucide-react";
+import SectionHeader from "../components/shared/SectionHeader";
+import AnimatedSection, { StaggerContainer, StaggerItem } from "../components/shared/AnimatedSection";
+import HomeCTA from "../components/home/HomeCTA";
+import CTAButton from "../components/shared/CTAButton";
+
+import khizarImg from "@/assets/team/khizar.jpg";
+import faizanImg from "@/assets/team/faizan.jpg";
+import murtazaImg from "@/assets/team/murtaza.jpg";
+import arsalanImg from "@/assets/team/arsalan.jpg";
+import iftekharImg from "@/assets/team/iftekhar.jpg";
+import talibImg from "@/assets/team/talib.jpg";
+
+const team = [
+  { name: "Khizar Saeed Khan", role: "Co-Founder", bio: "Enabling business growth with SAP SuccessFactors, GenAI, and advanced technologies.", photo: khizarImg },
+  { name: "Faizan Khan", role: "Co-Founder", bio: "Senior full-stack developer and tech lead with 8+ years building scalable web and mobile solutions.", photo: faizanImg },
+  { name: "Murtaza Malik", role: "Co-Founder", bio: "Graphic and UI/UX designer turned project manager, creating meaningful and impactful products.", photo: murtazaImg },
+  { name: "Arsalan Khan", role: "Senior Manager", bio: "Strategic leader with deep technical expertise across front-end and back-end, delivering high-performing SaaS applications.", photo: arsalanImg },
+  { name: "Iftekhar Ali Ansari", role: "AI Engineer", bio: "AI engineer specializing in Generative AI, NLP, and machine learning solutions.", photo: iftekharImg },
+  { name: "Mohammad Talib Uddin", role: "Backend Engineer", bio: "Backend software engineer specializing in Java, Spring Boot, Python, and microservices architecture.", photo: talibImg },
+];
+
+const values = [
+  { icon: Heart, title: "People First", desc: "We build every feature with the end-user in mind — both business owners and their teams.", color: "bg-rose-50 text-rose-600" },
+  { icon: Shield, title: "Trustworthy & Secure", desc: "Enterprise-grade security with SOC 2 compliance and robust data protection standards.", color: "bg-blue-50 text-blue-600" },
+  { icon: Lightbulb, title: "Always Innovating", desc: "We continuously improve our platform based on customer feedback and emerging business technology trends.", color: "bg-amber-50 text-amber-600" },
+  { icon: Globe, title: "Built for Growth", desc: "Multi-country tax support, multi-currency accounting, and region-specific compliance — ready for wherever your business goes.", color: "bg-emerald-50 text-emerald-600" },
+];
+
+export default function AboutPage() {
+  useEffect(() => {
+    document.title = "About Us — Worklynx";
+  }, []);
+
+  return (
+    <>
+      {/* Hero */}
+      <section className="pt-32 pb-20 gradient-hero">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <AnimatedSection>
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-semibold mb-6">
+                Our Story
+              </span>
+              <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                We're on a Mission to Make Business{" "}
+                <span className="text-gradient-brand">Operations Effortless</span>
+              </h1>
+              <p className="text-lg text-slate-600 leading-relaxed">
+                Worklynx was born from a simple frustration: business owners spending more time on spreadsheets than on growing their business.
+                We set out to build the all-in-one platform we always wished existed.
+              </p>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Story */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <AnimatedSection direction="left">
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Story</h2>
+              <p className="text-slate-600 leading-relaxed mb-5">
+                Our founders witnessed firsthand how growing businesses struggled with fragmented tools — one for accounting, another for inventory, yet another for payroll. Errors were costly, and nothing talked to each other.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-5">
+                We spent months talking to business owners before writing a single line of code. What we learned shaped every feature of Worklynx: businesses needed something powerful enough for enterprise needs but simple enough for a 10-person team.
+              </p>
+              <p className="text-slate-600 leading-relaxed mb-8">
+                Today, Worklynx serves hundreds of businesses, managing their accounting, inventory, sales, and operations in one place. Our mission remains unchanged: make business operations invisible so companies can focus on what matters — growth and their people.
+              </p>
+              <CTAButton href="/contact" variant="primary" size="md">
+                Get in Touch
+              </CTAButton>
+            </AnimatedSection>
+
+            <AnimatedSection direction="right" delay={0.1}>
+              {/* Timeline */}
+              <div className="space-y-6">
+                {[
+                  { year: "2021", event: "Founded. Months of customer research and product discovery.", color: "bg-blue-500" },
+                  { year: "2022", event: "Launched MVP. First 50 customers in 3 months.", color: "bg-indigo-500" },
+                  { year: "2023", event: "Expanded to 200+ companies. Full accounting & inventory suite.", color: "bg-violet-500" },
+                  { year: "2024", event: "Launched modular pricing, payroll, and restaurant modules.", color: "bg-blue-500" },
+                  { year: "2025", event: "500+ companies on platform. Multi-country expansion begins.", color: "bg-indigo-500" },
+                  { year: "2026", event: "Expanding compliance support to GCC & Southeast Asian markets.", color: "bg-violet-500" },
+                ].map((item) => (
+                  <div key={item.year} className="flex items-start gap-4">
+                    <div className={`w-12 h-7 rounded-lg ${item.color} flex items-center justify-center text-white text-xs font-bold shrink-0`}>
+                      {item.year}
+                    </div>
+                    <p className="text-sm text-slate-600 leading-relaxed pt-1">{item.event}</p>
+                  </div>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-20 gradient-hero">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="What Drives Us"
+            heading="Mission & Vision"
+            subtext="The principles that guide every decision we make at Worklynx."
+          />
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <AnimatedSection direction="left">
+              <div className="p-8 rounded-2xl bg-white border border-slate-100 shadow-sm h-full">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-5">
+                  <Target className="w-5 h-5 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Our Mission</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  To eliminate the administrative burden of running a business — making accounting, inventory, sales, and employee management so seamless that teams can focus on growth and their people.
+                </p>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection direction="right" delay={0.1}>
+              <div className="p-8 rounded-2xl bg-white border border-slate-100 shadow-sm h-full">
+                <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center mb-5">
+                  <TrendingUp className="w-5 h-5 text-indigo-600" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Our Vision</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  A future where every growing business — from a 10-person startup to a 10,000-person enterprise — has access to the same world-class business management tools, regardless of their size or location.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="Our Values"
+            heading="The Principles We Live By"
+          />
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {values.map((v) => (
+              <StaggerItem key={v.title}>
+                <div className="p-6 rounded-2xl bg-white border border-slate-100 hover:shadow-lg transition-shadow h-full">
+                  <div className={`w-10 h-10 rounded-xl ${v.color} flex items-center justify-center mb-4`}>
+                    <v.icon className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-base font-bold text-slate-900 mb-2">{v.title}</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed">{v.desc}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Team */}
+      <section className="py-20 gradient-hero">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="The Team"
+            heading={<>Meet the People Behind <span className="text-gradient-brand">Worklynx</span></>}
+            subtext="A passionate team of engineers, designers, and business technology experts."
+          />
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {team.map((member) => (
+              <StaggerItem key={member.name}>
+                <div className="p-6 rounded-2xl bg-white border border-slate-100 hover:shadow-lg transition-shadow flex gap-4 h-full">
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className="w-14 h-14 rounded-xl object-cover object-top shrink-0"
+                  />
+                  <div className="flex flex-col">
+                    <h4 className="text-base font-bold text-slate-900">{member.name}</h4>
+                    <p className="text-xs font-semibold text-blue-600 mb-2">{member.role}</p>
+                    <p className="text-xs text-slate-500 leading-relaxed flex-1">{member.bio}</p>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+          <AnimatedSection className="mt-8 text-center">
+            <p className="text-sm text-slate-500">
+              ...and a growing team of <span className="font-semibold text-slate-700">30+ professionals</span> dedicated to building, improving, and supporting the platform every day.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <HomeCTA />
+    </>
+  );
+}
