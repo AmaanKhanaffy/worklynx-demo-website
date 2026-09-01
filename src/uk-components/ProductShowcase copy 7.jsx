@@ -236,8 +236,8 @@ export default function ProductsShowcaseNew1() {
                                     className={`
                                         grid
                                         items-center
-                                        gap-14
-                                        py-20
+                                        gap-4
+                                        py-10
                                         md:grid-cols-2
                                         md:gap-16
                                         lg:gap-24
@@ -459,24 +459,7 @@ export default function ProductsShowcaseNew1() {
                                             />
 
 
-                                            {/* Background number */}
-
-                                            <span
-                                                className="
-                                                    absolute
-                                                    bottom-0
-                                                    right-0
-                                                    select-none
-                                                    text-[140px]
-                                                    font-semibold
-                                                    leading-none
-                                                    tracking-[-0.08em]
-                                                    text-neutral-100
-                                                    md:text-[190px]
-                                                "
-                                            >
-                                                {product.number}
-                                            </span>
+                                           
 
 
                                             {/* Product image */}

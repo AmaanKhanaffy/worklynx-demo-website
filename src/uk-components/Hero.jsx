@@ -65,16 +65,18 @@ function PenUnderline() {
       className="
         pointer-events-none
         absolute
-        left-1/2
-        top-[92%]
-        z-[-1]
-        h-[15px]
-        w-[200px]
-        -translate-x-1/2
+       
         overflow-visible
 
-        sm:h-[25px]
-        sm:w-[260px]
+        left-1/2
+top-[92%]
+z-[-1]
+h-[15px]
+w-[120%]
+-translate-x-1/2
+
+       sm:h-[28px]
+sm:w-[125%]
       "
       fill="none"
     >
@@ -183,6 +185,116 @@ export default function Hero() {
         <div className="absolute inset-x-0 top-0 h-[320px] bg-gradient-to-b from-white/80 to-transparent" />
       </div>
 
+      {/* Purple sunlight — ambient glow */}
+<div
+  className="
+    pointer-events-none
+    absolute
+    left-[18%]
+    top-[30%]
+    h-[520px]
+    w-[520px]
+    -translate-x-1/2
+    -translate-y-1/2
+    rounded-full
+    bg-[#c9a8f5]/10
+    blur-[110px]
+  "
+/>
+
+{/* Purple 3D orb */}
+<div
+  className="
+    pointer-events-none
+    absolute
+    left-[18%]
+    top-[30%]
+    h-[360px]
+    w-[360px]
+    -translate-x-1/2
+    -translate-y-1/2
+    rounded-full
+    opacity-60
+    [background:radial-gradient(circle_at_32%_28%,rgba(255,255,255,0.98)_0%,rgba(245,238,255,0.9)_12%,rgba(220,201,249,0.65)_30%,rgba(194,163,239,0.28)_52%,rgba(165,125,225,0.08)_70%,transparent_78%)]
+    [box-shadow:inset_-35px_-25px_70px_rgba(130,80,200,0.08),inset_25px_20px_45px_rgba(255,255,255,0.35),0_0_80px_rgba(165,125,225,0.10)]
+  "
+/>
+
+{/* Tiny specular shine */}
+<div
+  className="
+    pointer-events-none
+    absolute
+    left-[13%]
+    top-[25%]
+    h-16
+    w-16
+    -translate-x-1/2
+    -translate-y-1/2
+    rounded-full
+    bg-white/50
+    blur-[18px]
+  "
+/>
+{/* right side  */}
+{/* Purple sunlight — right side */}
+<div
+  className="
+    pointer-events-none
+    absolute
+    hidden
+    md:block
+    right-[8%]
+    top-[18%]
+    h-[520px]
+    w-[520px]
+    translate-x-1/2
+    -translate-y-1/2
+    rounded-full
+    bg-[#c9a8f5]/10
+    blur-[110px]
+  "
+/>
+
+{/* Purple 3D light orb */}
+<div
+  className="
+    pointer-events-none
+    absolute
+    hidden
+    md:block
+    right-[8%]
+    top-[18%]
+    h-[360px]
+    w-[360px]
+    translate-x-1/2
+    -translate-y-1/2
+    rounded-full
+    opacity-55
+    [background:radial-gradient(circle_at_32%_28%,rgba(255,255,255,0.98)_0%,rgba(245,238,255,0.9)_12%,rgba(220,201,249,0.65)_30%,rgba(194,163,239,0.28)_52%,rgba(165,125,225,0.08)_70%,transparent_78%)]
+    [box-shadow:inset_-35px_-25px_70px_rgba(130,80,200,0.08),inset_25px_20px_45px_rgba(255,255,255,0.35),0_0_80px_rgba(165,125,225,0.10)]
+  "
+/>
+
+{/* Soft specular shine */}
+<div
+  className="
+    pointer-events-none
+    absolute
+    hidden
+    md:block
+    right-[17%]
+    top-[11%]
+    h-16
+    w-16
+    rounded-full
+    bg-white/45
+    blur-[18px]
+  "
+/>
+{/*  */}
+
+
       {/* ------------------------------------------------
           Hero Content (Heading, Subtitle, CTAs)
           Initially hidden during loader phase, animates in smoothly after delay
@@ -210,17 +322,17 @@ export default function Hero() {
             <br />
             business needs.
           </h1> */}
-          <h1 className="text-[34px] font-semibold leading-[1.08] tracking-[-0.045em] text-[#1a1b1e] xs:text-[40px] sm:text-[64px] md:text-[76px] lg:text-[66px]">
-            Everything{" "}
+          <h1 className="text-[34px] font-semibold leading-[1.15] tracking-[-0.045em] text-[#1a1b1e] xs:text-[40px] sm:text-[64px] md:text-[76px] lg:text-[60px]">
+            Powering  {" "}
             <span className="relative inline-block">
-              your
+              every part
               <PenUnderline />
             </span>
             <br />
-            business needs.
+            of your business.
           </h1>
 
-          <p className="mx-auto mt-6 max-w-[620px] text-[15px] font-medium leading-7 text-[#62646a] sm:text-[17px]">
+          <p className="mx-auto mt-6 max-w-[620px] text-[14px] font-base leading-7 text-[#62646a] sm:text-[16px]">
             Worklynx brings inventory, restaurant management and
             human resources together in one powerful business platform.
           </p>
