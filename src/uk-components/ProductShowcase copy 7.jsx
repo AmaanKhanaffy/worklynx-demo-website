@@ -22,7 +22,7 @@ const products = [
         title: "Inventory",
         description:
             "Take complete control of your inventory from one intelligent workspace. Track stock, manage products, monitor movement and make better purchasing decisions.",
-        image: "/posmachine.png",
+        image: "/posmachine2.png",
         href: "/inventory-management",
 
         features: [
@@ -56,7 +56,7 @@ const products = [
         title: "RMS",
         description:
             "Everything your restaurant needs to run smoothly. Connect orders, tables, billing and daily operations in one simple and powerful system.",
-        image: "/rmspos.png",
+        image: "/rmspos1.png",
         href: "/restaurant-management",
 
         features: [

@@ -148,18 +148,28 @@ function PenUnderline() {
 
 export default function Hero() {
   const [loaded, setLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     // Initial loader state: shows bigger Worklynx centered, then transitions into place after 900ms delay
     const timer = setTimeout(() => {
       setLoaded(true);
     }, 900);
 
-    return () => clearTimeout(timer);
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#f5f6f8] pb-20 pt-28 sm:pt-32 lg:pt-20">
+    <section className="relative min-h-screen overflow-x-hidden bg-[#f5f6f8] pb-16 pt-20 sm:pb-20 sm:pt-20 lg:pt-20">
       {/* ------------------------------------------------
           Background
       ------------------------------------------------ */}
@@ -200,7 +210,7 @@ export default function Hero() {
             <br />
             business needs.
           </h1> */}
-          <h1 className="text-[44px] font-semibold leading-[1.05] tracking-[-0.055em] text-[#1a1b1e] sm:text-[64px] md:text-[76px] lg:text-[66px]">
+          <h1 className="text-[34px] font-semibold leading-[1.08] tracking-[-0.045em] text-[#1a1b1e] xs:text-[40px] sm:text-[64px] md:text-[76px] lg:text-[66px]">
             Everything{" "}
             <span className="relative inline-block">
               your
@@ -224,7 +234,7 @@ export default function Hero() {
             Ecosystem Visual with Worklynx Loader Transition
         ------------------------------------------------ */}
 
-        <div className="relative mt-16 w-full max-w-[1150px]">
+        <div className="relative mt-4 lg:mt-16 w-full max-w-[1150px]">
           {/* Desktop connection lines */}
           {/* ========================================================
     DESKTOP CONNECTION SYSTEM
@@ -638,14 +648,14 @@ export default function Hero() {
             <motion.div
               initial={false}
               animate={{
-                scale: loaded ? 1 : 2.1,
-                y: loaded ? 0 : -155,
+                scale: loaded ? 1 : (isMobile ? 1.35 : 2.0),
+                y: loaded ? 0 : (isMobile ? -90 : -150),
               }}
               transition={{
                 duration: 0.9,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="relative z-30 my-6 lg:my-0"
+              className="relative z-30 my-4 sm:my-6 lg:my-0 flex justify-center"
             >
               <Worklynx />
             </motion.div>
@@ -653,10 +663,17 @@ export default function Hero() {
             {/* Mobile modules */}
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: loaded ? 1 : 0 }}
-              transition={{ duration: 0.7, delay: 0.35 }}
-              className="mt-8 grid w-full max-w-[600px] grid-cols-2 gap-3 lg:hidden"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{
+                opacity: loaded ? 1 : 0,
+                y: loaded ? 0 : 15,
+              }}
+              transition={{
+                duration: 0.7,
+                delay: 0.35,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="mt-6 sm:mt-8 grid w-full max-w-[600px] grid-cols-2 gap-2.5 sm:gap-3.5 lg:hidden"
             >
               {modules.map((module, index) => (
                 <Module
@@ -730,36 +747,35 @@ function Module({
       className="
         group
         flex
-        min-h-[62px]
-        min-w-[190px]
+        min-h-[58px] sm:min-h-[62px]
+        w-full min-w-0 lg:min-w-[190px] lg:w-auto
         items-center
-        gap-3
-        rounded-2xl
+        gap-2.5 sm:gap-3
+        rounded-xl sm:rounded-2xl
         border
         border-black/[0.06]
         bg-white
-        px-4
-        py-3
+        px-3 py-2.5 sm:px-4 sm:py-3
         shadow-[0_8px_30px_rgba(30,30,40,0.06)]
         transition-shadow
         hover:shadow-[0_14px_35px_rgba(30,30,40,0.1)]
       "
     >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-brand-600/15 to-brand-500/10 text-brand-600">
-        <Icon size={17} strokeWidth={1.8} />
+      <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl bg-linear-to-br from-brand-600/15 to-brand-500/10 text-brand-600">
+        <Icon size={16} strokeWidth={1.8} className="sm:w-[17px] sm:h-[17px]" />
       </div>
 
-      <div>
-        <p className="text-[12px] font-semibold text-[#36383d]">
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-[11px] sm:text-[12px] font-semibold text-[#36383d]">
           {title}
         </p>
 
-        <p className="mt-1 text-[10px] text-[#92949a]">
+        <p className="mt-0.5 sm:mt-1 truncate text-[9px] sm:text-[10px] text-[#92949a]">
           {subtitle}
         </p>
       </div>
 
-      <div className="ml-auto h-1.5 w-1.5 rounded-full bg-[#d3d5d9] transition-colors group-hover:bg-[#202020]" />
+      <div className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-[#d3d5d9] transition-colors group-hover:bg-[#202020]" />
     </motion.div>
   );
 }
@@ -779,11 +795,11 @@ function Worklynx({ onClick }) {
         className="
           pointer-events-none
           absolute
-          -left-[68px]
-          -top-[57px]
+          -left-[50px] sm:-left-[68px]
+          -top-[46px] sm:-top-[57px]
           z-10
-          h-[190px]
-          w-[360px]
+          h-[155px] sm:h-[190px]
+          w-[290px] sm:w-[360px]
           overflow-visible
         "
       >
@@ -898,14 +914,13 @@ function Worklynx({ onClick }) {
         }}
         className="
           relative
-          z-20 mt-5
+          z-20 mt-2 sm:mt-5
           flex
-          h-[76px]
-          w-[225px]
+          h-[62px] sm:h-[76px]
+          w-[190px] sm:w-[225px]
           items-center
           justify-center
-          rounded-[24px]
-          
+          rounded-[20px] sm:rounded-[24px]
           bg-white
           shadow-[0_20px_45px_rgba(99,102,241,0.35)]
         "
@@ -913,7 +928,7 @@ function Worklynx({ onClick }) {
         <img
           src={worklynxLogo}
           alt="Worklynx"
-          className="h-[440px] w-auto object-contain"
+          className="h-12 sm:h-16 w-auto  object-contain"
         />
 
         <span className="ml-2.5 text-[22px] font-semibold tracking-[-0.055em] text-white">
@@ -932,11 +947,11 @@ function Worklynx({ onClick }) {
         className="
           pointer-events-none
           absolute
-          -left-[68px]
-          -top-[57px]
+          -left-[50px] sm:-left-[68px]
+          -top-[46px] sm:-top-[57px]
           z-30
-          h-[190px]
-          w-[360px]
+          h-[155px] sm:h-[190px]
+          w-[290px] sm:w-[360px]
           overflow-visible
         "
       >
@@ -1129,11 +1144,40 @@ function ProductCard({
   type,
   index,
 }) {
+  const styles = {
+    inventory: {
+      iconBg: "bg-indigo-50",
+      iconColor: "text-indigo-600",
+      badgeBg: "bg-indigo-50",
+      badgeText: "text-indigo-600",
+      border: "hover:border-indigo-200",
+      glow: "group-hover:shadow-indigo-100/60",
+    },
+    rms: {
+      iconBg: "bg-emerald-50",
+      iconColor: "text-emerald-600",
+      badgeBg: "bg-emerald-50",
+      badgeText: "text-emerald-600",
+      border: "hover:border-emerald-200",
+      glow: "group-hover:shadow-emerald-100/60",
+    },
+    hrms: {
+      iconBg: "bg-blue-50",
+      iconColor: "text-blue-600",
+      badgeBg: "bg-blue-50",
+      badgeText: "text-blue-600",
+      border: "hover:border-blue-200",
+      glow: "group-hover:shadow-blue-100/60",
+    },
+  };
+
+  const style = styles[type];
+
   return (
     <motion.div
       initial={{
         opacity: 0,
-        y: 30,
+        y: 24,
       }}
       animate={{
         opacity: 1,
@@ -1145,43 +1189,85 @@ function ProductCard({
         ease: [0.22, 1, 0.36, 1],
       }}
       whileHover={{
-        y: -6,
+        y: -4,
       }}
-      className="
+      className={`
         group
+        relative
         min-h-[250px]
         overflow-hidden
         rounded-[22px]
-        border
-        border-black/[0.05]
+        border border-[#E8E9ED]
         bg-white
         p-5
-        shadow-[0_12px_40px_rgba(30,30,40,0.06)]
-      "
+        transition-all duration-300
+        ${style.border}
+        hover:shadow-[0_18px_45px_rgba(20,20,30,0.07)]
+        ${style.glow}
+      `}
     >
-      <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-brand-600/15 to-brand-500/10 text-brand-600">
-          {type === "inventory" && <Package size={16} strokeWidth={1.8} />}
-          {type === "rms" && <UtensilsCrossed size={16} strokeWidth={1.8} />}
-          {type === "hrms" && <Users size={16} strokeWidth={1.8} />}
+      {/* Very subtle SaaS accent */}
+      <div
+        className={`
+          pointer-events-none
+          absolute
+          -right-16
+          -top-16
+          h-32
+          w-32
+          rounded-full
+          blur-3xl
+          opacity-0
+          transition-opacity
+          duration-500
+          group-hover:opacity-40
+          ${type === "inventory"
+            ? "bg-indigo-400"
+            : type === "rms"
+              ? "bg-emerald-400"
+              : "bg-blue-400"
+          }
+        `}
+      />
+
+      {/* Header */}
+      <div className="relative flex items-center gap-3">
+        <div
+          className={`
+            flex h-10 w-10 shrink-0 items-center justify-center
+            rounded-xl
+            ${style.iconBg}
+            ${style.iconColor}
+          `}
+        >
+          {type === "inventory" && (
+            <Package size={17} strokeWidth={1.8} />
+          )}
+
+          {type === "rms" && (
+            <UtensilsCrossed size={17} strokeWidth={1.8} />
+          )}
+
+          {type === "hrms" && (
+            <Users size={17} strokeWidth={1.8} />
+          )}
         </div>
 
-        <div>
-          <h3 className="text-[13px] font-semibold text-[#34363b]">
+        <div className="min-w-0">
+          <h3 className="text-[13px] font-semibold tracking-[-0.01em] text-[#202124]">
             {title}
           </h3>
 
-          <span className="text-[9px] text-[#a0a2a7]">
-            Worklynx module
-          </span>
         </div>
       </div>
 
-      <p className="mt-3 max-w-[280px] text-[10px] leading-5 text-[#898b91]">
+      {/* Description */}
+      <p className="relative mt-3 max-w-[285px] text-[10px] leading-[1.7] text-[#73767C]">
         {description}
       </p>
 
-      <div className="mt-6">
+      {/* Preview */}
+      <div className="relative mt-5">
         {type === "inventory" && <InventoryPreview />}
         {type === "rms" && <RmsPreview />}
         {type === "hrms" && <HrmsPreview />}
@@ -1202,40 +1288,41 @@ function InventoryPreview() {
   ];
 
   return (
-    <div className="rounded-xl border border-[#eeeeef] bg-[#fafafa] p-4">
+    <div className="rounded-[15px] border border-indigo-100/80 bg-indigo-50/40 p-3.5">
       <div className="flex items-center justify-between">
-        <span className="text-[9px] font-medium text-[#74767c]">
+        <span className="text-[9px] font-semibold text-indigo-950/60">
           Inventory overview
         </span>
 
-        <span className="text-[8px] text-[#a0a2a7]">
+        <span className="flex items-center gap-1.5 text-[8px] font-medium text-indigo-600">
+          <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
           Live
         </span>
       </div>
 
-      <div className="mt-4 grid grid-cols-3 gap-2">
+      <div className="mt-3 grid grid-cols-3 gap-1.5">
         {products.map(([name, value], index) => (
           <div
             key={name}
-            className="rounded-lg bg-white p-2.5"
+            className="rounded-[9px] border border-indigo-100/70 bg-white px-2.5 py-2"
           >
-            <p className="text-[7px] text-[#999ba0]">
+            <p className="text-[7px] font-medium text-[#92959B]">
               {name}
             </p>
 
-            <p className="mt-1 text-sm font-medium text-[#45474d]">
+            <p className="mt-1 text-[13px] font-semibold tracking-[-0.02em] text-[#292B30]">
               {value}
             </p>
           </div>
         ))}
       </div>
 
-      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[#e9eaec]">
+      <div className="mt-3 h-1 overflow-hidden rounded-full bg-indigo-100">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: "78%" }}
           transition={{ duration: 1 }}
-          className="h-full rounded-full bg-[#707278]"
+          className="h-full rounded-full bg-indigo-500"
         />
       </div>
     </div>
@@ -1250,30 +1337,30 @@ function RmsPreview() {
   const bars = [35, 48, 42, 67, 55, 76, 63, 88, 72];
 
   return (
-    <div className="rounded-xl border border-[#eeeeef] bg-[#fafafa] p-4">
+    <div className="rounded-[15px] border border-emerald-100/80 bg-emerald-50/40 p-3.5">
       <div className="flex justify-between">
         <div>
-          <p className="text-[8px] text-[#999ba0]">
+          <p className="text-[8px] font-medium text-emerald-950/50">
             Today's revenue
           </p>
 
-          <p className="mt-1 text-xl font-medium text-[#44464b]">
+          <p className="mt-1 text-[19px] font-semibold tracking-[-0.035em] text-[#292B30]">
             ₹48.2K
           </p>
         </div>
 
         <div className="text-right">
-          <p className="text-[8px] text-[#999ba0]">
+          <p className="text-[8px] font-medium text-[#92959B]">
             Orders
           </p>
 
-          <p className="mt-1 text-sm font-medium text-[#44464b]">
+          <p className="mt-1 text-[13px] font-semibold text-[#292B30]">
             184
           </p>
         </div>
       </div>
 
-      <div className="mt-5 flex h-[35px] items-end gap-1.5">
+      <div className="mt-4 flex h-[34px] items-end gap-1.5">
         {bars.map((height, index) => (
           <motion.div
             key={index}
@@ -1285,7 +1372,14 @@ function RmsPreview() {
               duration: 0.6,
               delay: index * 0.05,
             }}
-            className="flex-1 rounded-t-[3px] bg-[#d2d4d7]"
+            className="
+              flex-1
+              rounded-t-[3px]
+              bg-emerald-200
+              transition-colors
+              duration-300
+              group-hover:bg-emerald-300
+            "
           />
         ))}
       </div>
@@ -1299,45 +1393,56 @@ function RmsPreview() {
 
 function HrmsPreview() {
   return (
-    <div className="rounded-xl border border-[#eeeeef] bg-[#fafafa] p-4">
+    <div className="rounded-[15px] border border-blue-100/80 bg-blue-50/40 p-3.5">
       <div className="flex justify-between">
         <div>
-          <p className="text-[8px] text-[#999ba0]">
+          <p className="text-[8px] font-medium text-blue-950/50">
             Employees
           </p>
 
-          <p className="mt-1 text-xl font-medium text-[#44464b]">
+          <p className="mt-1 text-[19px] font-semibold tracking-[-0.035em] text-[#292B30]">
             128
           </p>
         </div>
 
-        <div className="flex -space-x-2">
-          {[1, 2, 3, 4].map((item) => (
+        <div className="flex -space-x-1.5">
+          {["AK", "RS", "PM", "JD"].map((initials) => (
             <div
-              key={item}
-              className="h-7 w-7 rounded-full border-2 border-white bg-[#dfe1e4]"
-            />
+              key={initials}
+              className="
+        flex h-7 w-7
+        items-center justify-center
+        rounded-full
+        border-2 border-white
+        bg-blue-100
+        text-[8px]
+        font-semibold
+        text-blue-600
+      "
+            >
+              {initials}
+            </div>
           ))}
         </div>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-4">
         <div className="flex justify-between">
-          <span className="text-[8px] text-[#999ba0]">
+          <span className="text-[8px] font-medium text-[#92959B]">
             Attendance
           </span>
 
-          <span className="text-[8px] font-medium text-[#55575d]">
+          <span className="text-[8px] font-semibold text-blue-600">
             94%
           </span>
         </div>
 
-        <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#e7e8ea]">
+        <div className="mt-2 h-1 overflow-hidden rounded-full bg-blue-100">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "94%" }}
             transition={{ duration: 1 }}
-            className="h-full rounded-full bg-[#707278]"
+            className="h-full rounded-full bg-blue-500"
           />
         </div>
       </div>
