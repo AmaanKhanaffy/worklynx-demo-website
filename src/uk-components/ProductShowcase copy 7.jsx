@@ -288,7 +288,7 @@ export default function ProductsShowcaseNew1() {
 
                                         {/* ================= FEATURES ================= */}
 
-                                        <div className="mt-10 grid gap-7 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
+                                        <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-7">
 
                                             {product.features.map(
                                                 (feature) => {
@@ -341,7 +341,7 @@ export default function ProductsShowcaseNew1() {
 
                                                             <h4 className="text-sm font-medium text-neutral-900">
                                                                 {
-                                                                    feature.title
+                                                                    feature.title 
                                                                 }
                                                             </h4>
 
